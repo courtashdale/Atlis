@@ -1,2 +1,2 @@
-# Atlis
-Atlis is an **agent-based** web app that visualises current events and geopolitics using dynamic maps.
+# 🧭 Atlus
+Atlus is an **agent-based** web app that visualises current events and geopolitics using dynamic maps.
