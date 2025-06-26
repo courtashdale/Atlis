@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[^\\n]+(?: AND [^\\n]+){0,2}$",
+        "description": "Each string should contain up to 3 keywords, separated by 'AND'."
+      },
+      "maxItems": 5,
+      "minItems": 1
+    }
+  },
+  "required": ["events"]
+}

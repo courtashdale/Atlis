@@ -11,7 +11,7 @@ def get_articles():
         Only include a country in country_mentions if it is named directly in the article or plays a clear, specific role in the event.
         
         """,
-        schema_path="../schema/article.json"
+        schema_path="article.json"
     )
 
     return result or []
