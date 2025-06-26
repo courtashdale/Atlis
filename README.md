@@ -1,2 +1,2 @@
 # Atlis
-A map-based visualizer of geopolitics and current events.
+Atlis is an **agent-based** web app that visualises current events and geopolitics using dynamic maps.
