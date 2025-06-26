@@ -1,4 +1,4 @@
-# backend/agents/common/oa-agent.py
+# backend/agents/common/oa_agent.py
 """
 This is a boilerplate LLM agent that accepts:
 - A system message
@@ -19,6 +19,7 @@ from typing import Dict, Any
 from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
 from jsonschema import validate as jsonschema_validate, ValidationError as JsonSchemaValidationError
+from pathlib import Path
 
 # Load environment variables
 _ = load_dotenv(find_dotenv())
@@ -39,9 +40,12 @@ def run_agent(
         from backend.agents.model_selector import select_best_model
         model = select_best_model(user_prompt)
 
-    # Resolve absolute path to schema
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    abs_schema_path = os.path.join(base_dir, schema_path)
+    # Resolve schema path relative to backend/schema/
+    backend_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = Path(backend_dir).parents[2]
+    abs_schema_path = project_root / "backend" / "schema" / schema_path
+    if not abs_schema_path.is_file():
+        raise FileNotFoundError(f"❌ Schema file not found: {abs_schema_path}")
 
     with open(abs_schema_path, "r") as f:
         schema = json.load(f)

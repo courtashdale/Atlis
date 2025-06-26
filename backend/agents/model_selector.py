@@ -2,7 +2,7 @@
 import json
 import time
 from pathlib import Path
-from common.oa_agent import run_agent
+from backend.agents.common.oa_agent import run_agent
 import tiktoken
 
 # Load model metadata
@@ -21,10 +21,10 @@ def estimate_token_cost(prompt: str, model_name: str) -> tuple[float, int]:
     tokens = len(enc.encode(prompt))
     meta = get_model_metadata(model_name)
     cost_per_1k = meta.get("input_cost", 0)
-    return round((tokens / 1000) * cost_per_1k, 4), tokens
+    return round((tokens / 1000) * cost_per_1k, 5), tokens
 
 def select_best_model(user_prompt: str) -> str:
-    print("⚖️ Choosing the best model...")
+    print("⚖️ Choosing best model...")
     start_total = time.time()
 
     # Step 1: Estimate cost
@@ -38,7 +38,6 @@ Prompt:
 Only return the model name as a JSON object like: {{ "model": "<model-name>" }}
 """
     cost, tokens = estimate_token_cost(prompt_text, preview_model)
-    print(f"💰 Est. model selection cost: ${cost} ({tokens} tokens @ {preview_model})")
     print(f"⏱️ Cost estimate took {round(time.time() - start, 3)}s")
 
     # Step 2: Run selector agent
@@ -46,7 +45,7 @@ Only return the model name as a JSON object like: {{ "model": "<model-name>" }}
     result = run_agent(
         system_message="You are an expert model selector. Your job is to choose the best AI model for the given task. Return ONLY the model name string (e.g., 'gpt-4o-mini-search-preview-2025-03-11').",
         user_prompt=prompt_text,
-        schema_path="../schema/model_string.schema.json",
+        schema_path="model_string.schema.json",
         model=preview_model
     )
     print(f"⏱️ LLM selection took {round(time.time() - start, 3)}s")
@@ -54,8 +53,11 @@ Only return the model name as a JSON object like: {{ "model": "<model-name>" }}
     # Step 3: Final report
     start = time.time()
     model = result["model"]
-    shorthand = get_model_metadata(model).get("shorthand", "—")
-    print(f"▶︎ Model: {model} ({shorthand})")
+    metadata = get_model_metadata(model)
+    shorthand = metadata.get("shorthand", "—")
+    input_cost = metadata.get("input_cost", 0)
+    print(f"▶︎ Model selected: {model} ({shorthand})")
+    print(f"💸 Estimated cost: ${cost:.5f} ({tokens} tokens)")
     print(f"⏱️ Final metadata lookup took {round(time.time() - start, 3)}s")
 
     print(f"⏱️ Total selector time: {round(time.time() - start_total, 3)}s")

@@ -1,4 +1,7 @@
 # sandbox/events_plus_articles.py
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from backend.agents.common.oa_agent import run_agent
 import os
 import requests
@@ -32,14 +35,14 @@ current_events = run_agent(
         "Examples: 'Israel AND Gaza AND Ceasefire', 'Russia AND NATO', 'China AND Taiwan AND Tensions'. ",
         "Return this as an array under the key 'events'."
     ),
-    schema_path="../backend/schema/hot_topics.json"
+    schema_path="hot_topics.json"
 )
 
 summarizer = run_agent(
     system_message="Your task is to summarize a snippet from an article.",
     user_prompt="""Summarize the snippet delimited by triple hashtags. 
 Return this summary as a short summary under the key 'summary'.""",
-    schema_path="../schema/snippet_summary.json"
+    schema_path="snippet_summary.json"
 )
 
 # Print each headline
