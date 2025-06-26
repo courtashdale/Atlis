@@ -1,0 +1,9 @@
+{
+    "objects": [
+        {"title":"Conflict","color":"red"},
+        {"title":"Alliance","color":"blue"},
+        {"title":"Trade","color":"green"},
+        {"title":"Migration","color":"orange"},
+        {"title":"Conflict","color":"red"}
+    ]
+}

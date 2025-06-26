@@ -1,0 +1,24 @@
+
+{
+    "type": "object",
+    "properties": {
+        "headline": {"type": "string"},
+        "summary": {"type": "string"},
+        "source": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "url": {"type": "string", "format": "uri"},
+                "domain": {"type": "string"}
+            },
+            "required": ["name", "url", "domain"]
+        },
+        "published_at": {"type": "string", "format": "date-time"},
+        "topics": {"type": "array", "items": {"type": "string"}},
+        "country_mentions": {"type": "array", "items": {"type": "string"}},
+        "language": {"type": "string"},
+        "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "retrieved_at": {"type": "string", "format": "date-time"}
+    },
+    "required": ["headline", "summary", "source", "published_at", "topics", "country_mentions", "language", "confidence", "retrieved_at"]
+}

@@ -1,0 +1,115 @@
+{
+  "search": {
+    "models": [
+      {
+        "platform": "OpenAI",
+        "model": "gpt-4o-mini-search-preview-2025-03-11",
+        "strengths": "Fast, affordable small model for web search",
+        "performance": 2,
+        "speed": 4,
+        "input_cost": 0.15,
+        "output_cost": 0.6
+      },
+      {
+        "platform": "OpenAI",
+        "model": "gpt-4.1-2025-04-14",
+        "strengths": "Flagship model for complex tasks, well suited for problem solving across domains.",
+        "intelligence": 4,
+        "speed": 3,
+        "input_cost": 2,
+        "cached_input_cost": 0.5,
+        "output_cost": 8
+      }
+    ]
+  },
+  "reasoning": {
+    "models": [
+      {
+        "platform": "OpenAI",
+        "model": "o4-mini-2025-04-16",
+        "strengths": "Faster, more affordable reasoning model",
+        "input_cost": 1.1,
+        "cached_input_cost": 0.275,
+        "output_cost": 4.4,
+        "speed": 3,
+        "reasoning": 4
+      },
+      {
+        "platform": "OpenAI",
+        "model": "o3-2025-04-16",
+        "strengths": "OpenAI's most powerful reasoning model",
+        "reasoning": 5,
+        "speed": 1,
+        "input_cost": 2,
+        "cached_input_cost": 0.5,
+        "output_cost": 8
+      },
+      {
+        "platform": "OpenAI",
+        "model": "gpt-4o-2024-05-13",
+        "strengths": "Best all-around reasoning + multimodal model",
+        "reasoning": 5,
+        "speed": 4,
+        "input_cost": 5,
+        "cached_input_cost": 1.25,
+        "output_cost": 15
+      }
+    ]
+  },
+  "agents": {
+    "models": [
+        {
+            "platform": "OpenAI",
+            "model": "gpt-4o-mini-2024-07-18",
+            "strengths": "Fast, affordable small model for focused tasks",
+            "input_cost": 0.15,
+            "output_cost": 0.6
+        },
+        {
+            "platform": "OpenAI",
+            "model": "gpt-4.1-2025-04-14",
+            "strengths": "Flagship model for complex tasks, well suited for problem solving across domains.",
+            "intelligence": 4,
+            "speed": 3,
+            "input_cost": 2,
+            "cached_input_cost": 0.5,
+            "output_cost": 8
+        },
+        {
+            "platform": "OpenAI",
+            "model": "gpt-3.5-turbo-0125",
+            "strengths": "Best budget model for general purpose search and classification",
+            "performance": 2,
+            "speed": 4,
+            "input_cost": 0.5,
+            "output_cost": 1.5
+        },
+        {
+            "platform": "OpenAI",
+            "model": "gpt-3.5-turbo-0125",
+            "strengths": "Low-cost, high-speed option for simple agent tasks",
+            "speed": 4,
+            "input_cost": 0.5,
+            "output_cost": 1.5
+        }
+    ]
+  },
+  "embedding": {
+    "models": [
+        {
+            "platform": "OpenAI",
+            "model": "text-embedding-3-small",
+            "strengths": "text-embedding-3-small is our improved, more performant version of our ada embedding model.",
+            "input_cost": 0.02,
+            "speed": 3
+        },
+        {
+            "platform": "OpenAI",
+            "model": "text-embedding-3-large",
+            "strengths": "High-accuracy embedding model for semantic search and RAG",
+            "input_cost": 0.13,
+            "speed": 2
+        }
+    ]
+  }
+}
