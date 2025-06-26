@@ -32,9 +32,12 @@ def run_agent(
     system_message: str,
     user_prompt: str,
     schema_path: str,
-    model: str = "gpt-4o-mini-search-preview-2025-03-11"
+    model: str = None
 ) -> Dict[str, Any]:
     """Run a prompt against the model with schema validation."""
+    if model is None:
+        from backend.agents.model_selector import select_best_model
+        model = select_best_model(user_prompt)
 
     # Resolve absolute path to schema
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

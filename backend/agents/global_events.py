@@ -1,5 +1,12 @@
-# backend/agents/headline-scraper.py
+# backend/agents/global_events.py
 from common.oa_agent import run_agent
+
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
+
+# Now your imports work
+from backend.agents.common.oa_agent import run_agent
 
 current_events = run_agent(
     system_message="You are a geopolitical analyst.",
@@ -8,5 +15,6 @@ current_events = run_agent(
 )
 
 # Print each headline
+print(f"📰 Five headlines of current events: \n")
 for event in current_events["events"]:
     print("🔹", event)

@@ -5,6 +5,7 @@ import requests
 from dotenv import find_dotenv, load_dotenv
 from datetime import date
 from newsapi import NewsApiClient
+from newspaper import Article
 
 # Load API Key
 _ = load_dotenv(find_dotenv())
@@ -16,6 +17,12 @@ if not key:
 newsapi = NewsApiClient(api_key=key)
 today = str(date.today())
 
+def extract_article_text(url: str) -> str:
+    article = Article(url)
+    article.download()
+    article.parse()
+    return article.text
+
 # Get current event topics
 current_events = run_agent(
     system_message="You are a geopolitical analyst.",
@@ -25,7 +32,14 @@ current_events = run_agent(
         "Examples: 'Israel AND Gaza AND Ceasefire', 'Russia AND NATO', 'China AND Taiwan AND Tensions'. ",
         "Return this as an array under the key 'events'."
     ),
-    schema_path="../schema/hot_topics.json"
+    schema_path="../backend/schema/hot_topics.json"
+)
+
+summarizer = run_agent(
+    system_message="Your task is to summarize a snippet from an article.",
+    user_prompt="""Summarize the snippet delimited by triple hashtags. 
+Return this summary as a short summary under the key 'summary'.""",
+    schema_path="../schema/snippet_summary.json"
 )
 
 # Print each headline
@@ -42,6 +56,10 @@ for event in current_events["events"]:
             page=1
         )
         for article in all_articles.get('articles', []):
-            print("🔹", article['url'])
+            print("🔹", article['source']['name'])
+            text = extract_article_text(article['url'])
+            print(text[:1000])
     except Exception as e:
         print(f"❌ Couldn't find articles about {event}: {e}")
+
+#PYTHONPATH=. python sandbox/events_plus_articles.py
