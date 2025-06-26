@@ -1,9 +1,8 @@
-
 {
     "type": "object",
     "properties": {
-        "headline": {"type": "string"},
-        "summary": {"type": "string"},
+        "entity": {"type": "string"},
+        "type": {"type": "string"},
         "source": {
             "type": "object",
             "properties": {

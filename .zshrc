@@ -1,0 +1,1 @@
+alias runcontroller="PYTHONPATH=backend python backend/pipe/controller.py"

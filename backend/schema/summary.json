@@ -8,14 +8,13 @@
             "type": "object",
             "properties": {
                 "name": {"type": "string"},
-                "url": {"type": "string", "format": "uri"},
-                "domain": {"type": "string"}
+                "url": {"type": "string", "format": "uri"}
             },
-            "required": ["name", "url", "domain"]
+            "required": ["name", "url"]
         },
         "published_at": {"type": "string", "format": "date-time"},
         "topics": {"type": "array", "items": {"type": "string"}},
         "country_mentions": {"type": "array", "items": {"type": "string"}}
     },
-    "required": ["headline", "summary", "source", "published_at", "topics", "country_mentions", "language", "confidence", "retrieved_at"]
+    "required": ["headline", "summary", "source", "published_at", "topics", "country_mentions"]
 }
