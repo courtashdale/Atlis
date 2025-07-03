@@ -1,0 +1,7 @@
+cat > .husky/pre-commit << 'EOF'
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx eslint frontend/src --ext js,jsx --fix
+node tools/add-path-header.js
+EOF
